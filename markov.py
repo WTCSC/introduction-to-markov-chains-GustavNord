@@ -1,22 +1,11 @@
 import random
+word_input = input("Starting Word: ")
+number_input = int(input("Number of Words: "))
 
-"""
-Create the sample text and the dictionary to store word transitions
+text = "It is always a pleasure to a man in public life to meet the real governing classes. I wish to bid you welcome to Washington this evening, and to say but one word of greeting to you, and that word shall take the form of a warning. I did not speak in jest when I alluded to you as representatives of the governing classes. I think that we of the United States can not keep too fresh in our minds the fact that the men ultimately responsible for the Government are not the representatives of the people, but the people themselves, and that therefore heavy is the responsibility that lies upon the people and above all upon those who do the most toward shaping the thought of the people. In the days of my youth I was a literary man myself. In reading a book recently, a series of essays, I was immensely struck by one thought developed in it. The writer, one of our greatest scholars, was speaking of the fact that freedom could not exist unless there went with it a thorough appreciation of responsibility,[6] and he used a phrase somewhat like this—that among all peoples there must be restraint; if there is no restraint the result is inevitably anarchy. That means the negation of all government, and the negation of all government of course means the negation of popular government; and that therefore there must be restraint, and that therefore a free people had merely substituted self-restraint for external restraint; and the permanence of our freedom as a people, the permanence of our liberties, depends upon the way in which we show and exercise that self-restraint"
 
-TODO: Replace the sample text with a larger text for more interesting results
-"""
-text = "Mary had a little lamb its fleece was white as snow"
 transitions = {}
 
-"""
-Build the Markov Chain
-
-1. Split the text into words
-2. Iterate over the words
-3. For each word, add the next word to the list of transitions
-
-TODO: Handle punctuation and capitalization for better results
-"""
 words = text.split()
 for i in range(len(words) - 1):
     current_word = words[i]
@@ -25,21 +14,6 @@ for i in range(len(words) - 1):
         transitions[current_word] = []
     transitions[current_word].append(next_word)
 
-"""
-Generate new text using the Markov Chain, starting with a given word and
-generating a specified number of words:
-
-1. Start with the given word
-2. Add the word to the result list
-3. For the specified number of words:
-    a. If the current word is in the transitions dictionary, choose a random next word
-    b. Add the next word to the result list
-    c. Update the current word to the next word
-4. Return the generated text as a string
-
-TODO: Clean up the generated text for better formatting and readability,
-e.g., capitalization, punctuation, line breaks, etc.
-"""
 def generate_text(start_word, num_words):
     current_word = start_word
     result = [current_word]
@@ -52,9 +26,9 @@ def generate_text(start_word, num_words):
             break
     return " ".join(result)
 
-"""
-Example usage, generating 10 words starting with "Mary"
-
-TODO: Accept user input for the starting word and number of words to generate
-"""
-print(generate_text("Mary", 10))
+b4caps = generate_text(word_input, number_input)
+sentences = b4caps.split('.')
+sentences = [sentence.strip().capitalize() + '.' for sentence in sentences if sentence.strip()]
+real_text = ' '.join(sentences)
+real_text = real_text.replace(" i ", " I ")
+print(real_text)
