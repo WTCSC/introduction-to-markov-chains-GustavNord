@@ -1,4 +1,5 @@
 import random
+
 word_input = input("Starting Word: ")
 number_input = int(input("Number of Words: "))
 
