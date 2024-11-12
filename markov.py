@@ -1,3 +1,4 @@
+# Comments
 import random
 
 word_input = input("Starting Word: ")
