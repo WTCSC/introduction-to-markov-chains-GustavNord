@@ -1,4 +1,4 @@
-# Comments
+# Imports the random module
 import random
 
 # Asks for user input for a starting word and how many words to be created
@@ -11,39 +11,53 @@ text = "It is always a pleasure to a man in public life to meet the real governi
 # Replaces the periods from the taken sources with nothing
 new_text = text.replace(".", "")
 
+# Creates a dictonary
 transitions = {}
 
+# Separating the text into words
 words = new_text.split()
+# Loops through the words except the last one
 for i in range(len(words) - 1):
+    # The current word
     current_word = words[i]
+    # Word after the current word
     next_word = words[i + 1]
+    # if statement that if the current word isn't in the dictionary it should create a new list for this word
     if current_word not in transitions:
         transitions[current_word] = []
+        # Add the new word to the list for the current word
     transitions[current_word].append(next_word)
-
+# Defines a function with the starting word and number of words
 def generate_text(start_word, num_words):
+    # Start with the start_word from user input and make a list with the words and start a counter for how many words
     current_word = start_word
     result = [current_word]
     counter = 0
+    # Generate the amount of words that user input
     for _ in range(num_words - 1):
+        # Checks if the current word has a list of next words
         if current_word in transitions:
+            # Chooses a random word to be used next and adds the chosen word to the results and also add one to the counter
             next_word = random.choice(transitions[current_word])
             result.append(next_word)
             counter = counter + 1
-
+            # After at least 5 words, there is a ten percent chance of a period after the last word, if so, reset the counter
             if random.random() < 0.1 and counter >= 5:
                 result[-1] += '.'
                 counter = 0
-
+            # Update the current word and stop if there are no next words for the current word
             current_word = next_word
         else:
             break
+            # Combine the words into a string
     return " ".join(result)
-
+# Generates the text before capitalizing 
 b4caps = generate_text(word_input, number_input)
+# Splits the text to sentences and capitalizing and adding periods to them and later joining them together
 sentences = b4caps.split('.')
 sentences = [sentence.strip().capitalize() + '.' for sentence in sentences if sentence.strip()]
 real_text = ' '.join(sentences)
+# If an 'i' occurs, switch it to a 'I'
 real_text = real_text.replace(" i ", " I ")
-
+# print the final 'real' text
 print(real_text)
